@@ -283,29 +283,70 @@
     }
     .values-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; margin-top: 2rem; }
     .value-card {
-      background: var(--white);
+      position: relative;
       border: 1px solid rgba(201,169,110,0.25);
-      border-radius: 4px; padding: 1.3rem;
+      border-radius: 4px; padding: 1.6rem 1.3rem;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
       transition: border-color .3s, transform .3s;
+      min-height: 160px;
+      display: flex; flex-direction: column; justify-content: flex-end;
+    }
+    .value-card::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(160deg, rgba(247,244,239,0.92) 0%, rgba(247,244,239,0.80) 100%);
+      transition: background .3s;
     }
     .value-card:hover { border-color: var(--gold); transform: translateY(-3px); }
-    .value-icon { font-size: 1.4rem; margin-bottom: .5rem; }
-    .value-card h4 { font-size: 0.78rem; letter-spacing: 1.5px; text-transform: uppercase; color: var(--gold); margin-bottom: .4rem; }
-    .value-card p { font-size: 0.83rem; color: var(--mid); }
+    .value-card:hover::before { background: linear-gradient(160deg, rgba(247,244,239,0.85) 0%, rgba(247,244,239,0.70) 100%); }
+    .value-card > * { position: relative; z-index: 1; }
+    .value-card h4 {
+      font-family: var(--font-serif); font-size: 1.15rem;
+      font-style: italic; letter-spacing: 1px;
+      color: var(--dark); margin-bottom: .55rem; font-weight: normal;
+    }
+    .value-card p {
+      font-size: 0.87rem; color: var(--mid);
+      line-height: 1.75; letter-spacing: .2px;
+    }
+
+    /* info-panel con immagine */
+    .info-panel {
+      position: relative;
+      overflow: hidden;
+      background-size: cover;
+      background-position: center;
+    }
+    .info-panel::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: rgba(255,255,255,0.93);
+      transition: background .3s;
+    }
+    .info-panel:hover::before { background: rgba(255,255,255,0.88); }
+    .info-panel > * { position: relative; z-index: 1; }
 
     /* right column */
     .chi-right { display: flex; flex-direction: column; gap: 2rem; }
     .info-panel {
       background: var(--white);
       border: 1px solid rgba(201,169,110,0.2);
-      border-radius: 6px; padding: 2rem;
+      border-radius: 6px; padding: 2.2rem;
     }
     .info-panel h3 {
-      font-size: 0.68rem; letter-spacing: 3px; text-transform: uppercase;
-      color: var(--gold); margin-bottom: 1.2rem;
+      font-family: var(--font-serif); font-size: 1.25rem;
+      font-style: italic; font-weight: normal;
+      color: var(--dark); margin-bottom: .4rem; letter-spacing: .5px;
+    }
+    .info-panel h3::after {
+      content: ''; display: block; width: 32px; height: 1px;
+      background: var(--gold); margin-top: .7rem;
     }
     .info-panel p {
-      color: var(--mid); font-size: 0.9rem; line-height: 1.75;
+      color: var(--mid); font-size: 0.91rem; line-height: 1.8;
+      margin-top: 1.1rem;
     }
     .audit-badges { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.5rem; }
     .audit-badge {
@@ -399,12 +440,22 @@
     .prod-step:hover::before { background: rgba(10,10,10,0.55); }
     .prod-step > * { position: relative; z-index: 1; }
     .prod-num {
-      font-family: var(--font-serif); font-size: 2.2rem;
-      color: rgba(201,169,110,0.4); font-style: italic;
-      line-height: 1; margin-bottom: .8rem;
+      position: absolute; top: -0.5rem; right: 1rem;
+      font-family: var(--font-serif); font-size: 5.5rem;
+      color: rgba(201,169,110,0.12); font-style: italic;
+      line-height: 1; pointer-events: none; z-index: 0;
+      letter-spacing: -2px;
     }
-    .prod-step h4 { font-size: 0.78rem; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: .6rem; }
-    .prod-step p { font-size: 0.83rem; color: rgba(255,255,255,0.6); }
+    .prod-step-content { position: relative; z-index: 1; padding-top: .5rem; }
+    .prod-step h4 {
+      font-family: var(--font-serif); font-size: 1rem;
+      font-style: italic; font-weight: normal;
+      color: var(--gold); margin-bottom: .55rem; letter-spacing: .3px;
+    }
+    .prod-step p {
+      font-size: 0.84rem; color: rgba(255,255,255,0.65);
+      line-height: 1.75; letter-spacing: .1px;
+    }
 
     /* ════════════════════════════════
        CONTATTI
@@ -498,17 +549,61 @@
        FOOTER
     ════════════════════════════════ */
     footer {
-      background: var(--dark); padding: 3rem 2rem 2rem;
-      text-align: center; border-top: 1px solid rgba(201,169,110,0.15);
+      background: var(--dark); padding: 4rem 2rem 2.5rem;
+      text-align: center;
     }
-    .footer-logo { font-family: var(--font-serif); font-size: 1.8rem; color: var(--gold); font-style: italic; letter-spacing: 3px; margin-bottom: .2rem; }
-    .footer-company { font-size: 0.6rem; letter-spacing: 3px; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-bottom: 2rem; }
-    .footer-links { display: flex; justify-content: center; gap: 2rem; flex-wrap: wrap; margin-bottom: 2rem; }
-    .footer-links a { color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.78rem; letter-spacing: 1px; transition: color .2s; }
-    .footer-links a:hover { color: var(--gold); }
-    .footer-divider { border: none; border-top: 1px solid rgba(255,255,255,0.07); margin: 1.5rem auto; max-width: 400px; }
-    .footer-copy { font-size: 0.7rem; color: rgba(255,255,255,0.22); letter-spacing: .5px; }
-    .footer-piva { font-size: 0.68rem; color: rgba(255,255,255,0.15); margin-top: .3rem; }
+    .footer-inner { max-width: 960px; margin: 0 auto; }
+    .footer-top {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 2.5rem; margin-bottom: 3rem; text-align: left;
+    }
+    .footer-brand-logo {
+      height: 110px; width: auto; object-fit: contain;
+      display: block; margin-bottom: .8rem;
+    }
+    .footer-brand .footer-company {
+      font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,0.28); display: block; margin-bottom: 1rem;
+    }
+    .footer-brand p {
+      font-size: 0.8rem; color: rgba(255,255,255,0.35); line-height: 1.7;
+    }
+    .footer-col h5 {
+      font-size: 0.62rem; letter-spacing: 3px; text-transform: uppercase;
+      color: var(--gold); margin-bottom: 1rem; font-weight: 600;
+    }
+    .footer-col ul { list-style: none; }
+    .footer-col ul li { margin-bottom: .55rem; }
+    .footer-col ul li a {
+      color: rgba(255,255,255,0.38); text-decoration: none;
+      font-size: 0.8rem; letter-spacing: .5px; transition: color .2s;
+    }
+    .footer-col ul li a:hover { color: var(--gold); }
+    .footer-contact-btns {
+      display: flex; flex-direction: column; gap: .7rem; margin-top: .5rem;
+    }
+    .footer-btn {
+      display: flex; align-items: center; gap: .6rem;
+      padding: .55rem .9rem; border-radius: 3px;
+      font-size: 0.76rem; text-decoration: none; letter-spacing: .5px;
+      transition: background .2s, color .2s; border: 1px solid rgba(201,169,110,0.2);
+      color: rgba(255,255,255,0.5);
+    }
+    .footer-btn:hover { background: rgba(201,169,110,0.1); color: var(--gold); border-color: var(--gold); }
+    .footer-btn span { font-size: .9rem; }
+    .footer-bottom {
+      border-top: 1px solid rgba(255,255,255,0.06);
+      padding-top: 1.5rem;
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: .8rem;
+    }
+    .footer-copy { font-size: 0.68rem; color: rgba(255,255,255,0.2); letter-spacing: .4px; }
+    .footer-piva { font-size: 0.65rem; color: rgba(255,255,255,0.13); }
+    @media (max-width: 768px) {
+      .footer-top { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .footer-contact-btns { align-items: center; }
+      .footer-bottom { flex-direction: column; text-align: center; }
+    }
 
     /* ════════════════════════════════
        RESPONSIVE
@@ -586,6 +681,12 @@
     .stitch-divider {
       width: 100%; line-height: 0; padding: 22px 0; display: block; overflow: hidden;
     }
+
+    /* Forbice dentro la hero */
+    .stitch-hero {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 0; background: transparent !important; z-index: 2;
+    }
     .stitch-divider svg { width: 100%; display: block; overflow: visible; }
 
     /* lo stato di default — JS controlla via style inline */
@@ -637,12 +738,6 @@
       100% { transform: rotate(0deg)  scale(1); }
     }
 
-    /* ── Punto a croce — pre-footer ── */
-    .stitch-unravel {
-      width: 100%; line-height: 0; padding: 28px 0;
-      background: var(--dark); overflow: visible; display: block;
-    }
-    .stitch-unravel svg { width: 100%; display: block; overflow: visible; }
 
     /* ── Glitter spot ── */
     .glitter {
@@ -658,7 +753,7 @@
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
   <button class="mobile-menu-close" id="mobileClose" aria-label="Chiudi menu">&#x2715;</button>
   <div class="mobile-menu-logo">
-    <img src="logoLGshoes.png" alt="LG Shoes Logo" />
+    <img src="assets/images/logo/logoLGshoes.png" alt="LG Shoes Logo" />
   </div>
   <ul class="mobile-menu-links">
     <li><a href="#home">Home</a></li>
@@ -677,7 +772,7 @@
 <nav class="navbar">
   <div class="nav-inner">
     <a href="#home" class="nav-logo">
-      <img src="logoLGshoes.png" alt="LG Shoes Logo" />
+      <img src="assets/images/logo/logoLGshoes.png" alt="LG Shoes Logo" />
     </a>
 
     <ul class="nav-links" id="navLinks">
@@ -727,30 +822,30 @@
     <span>fatto a mano · made in Italy</span>
     <div class="craft-tag-line"></div>
   </div>
-</section>
 
-<!-- ── CUCITURA 1 ── -->
-<div class="stitch-divider" data-stitch aria-hidden="true" style="background:var(--light);">
-  <svg viewBox="0 0 1450 72" preserveAspectRatio="none">
-    <line class="stitch-line" x1="0" y1="36" x2="1450" y2="36"
-      stroke="#c9a96e" stroke-width="2.5" stroke-dasharray="14 8" opacity=".75"/>
-    <line class="stitch-shine" x1="0" y1="36" x2="1450" y2="36"
-      stroke="#ffe48a" stroke-width="2.5" opacity=".0"/>
-    <g class="stitch-scissors">
-      <circle cx="50" cy="36" r="5" fill="#c9a96e" opacity=".9"/>
-      <g class="sc-blade-up">
-        <circle cx="12" cy="12" r="14" fill="none" stroke="#c9a96e" stroke-width="3"/>
-        <line x1="24" y1="21" x2="50" y2="36" stroke="#c9a96e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="50" y1="36" x2="92" y2="44" stroke="#c9a96e" stroke-width="3" stroke-linecap="round"/>
+  <!-- ── CUCITURA HERO — forbice bianca sul fondo della home ── -->
+  <div class="stitch-divider stitch-hero" data-stitch aria-hidden="true">
+    <svg viewBox="0 0 1450 72" preserveAspectRatio="none">
+      <line class="stitch-line" x1="0" y1="36" x2="1450" y2="36"
+        stroke="#c9a96e" stroke-width="2.5" stroke-dasharray="14 8" opacity=".75"/>
+      <line class="stitch-shine" x1="0" y1="36" x2="1450" y2="36"
+        stroke="#ffe48a" stroke-width="2.5" opacity=".0"/>
+      <g class="stitch-scissors">
+        <circle cx="50" cy="36" r="3" fill="#c9a96e" opacity=".9"/>
+        <g class="sc-blade-up">
+          <circle cx="25" cy="20" r="9" fill="none" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="33" y1="26" x2="50" y2="36" stroke="#c9a96e" stroke-width="2" stroke-linecap="round"/>
+          <line x1="50" y1="36" x2="77" y2="41" stroke="#c9a96e" stroke-width="2" stroke-linecap="round"/>
+        </g>
+        <g class="sc-blade-dn">
+          <circle cx="25" cy="52" r="9" fill="none" stroke="#c9a96e" stroke-width="2"/>
+          <line x1="33" y1="46" x2="50" y2="36" stroke="#c9a96e" stroke-width="2" stroke-linecap="round"/>
+          <line x1="50" y1="36" x2="77" y2="31" stroke="#c9a96e" stroke-width="2" stroke-linecap="round"/>
+        </g>
       </g>
-      <g class="sc-blade-dn">
-        <circle cx="12" cy="60" r="14" fill="none" stroke="#c9a96e" stroke-width="3"/>
-        <line x1="24" y1="51" x2="50" y2="36" stroke="#c9a96e" stroke-width="3" stroke-linecap="round"/>
-        <line x1="50" y1="36" x2="92" y2="28" stroke="#c9a96e" stroke-width="3" stroke-linecap="round"/>
-      </g>
-    </g>
-  </svg>
-</div>
+    </svg>
+  </div>
+</section>
 
 <!-- ══════════════ CHI SIAMO ══════════════ -->
 <section id="chi-siamo" style="overflow:hidden;">
@@ -774,32 +869,28 @@
           «È grazie alla profonda esperienza della Sig.ra Carrino Vincenza che la nostra struttura ha raggiunto gli attuali standard qualitativi, diventando partner strategico per i più prestigiosi marchi mondiali del lusso.»
         </blockquote>
         <div class="values-grid">
-          <div class="value-card">
-            <div class="value-icon">✦</div>
+          <div class="value-card" style="background-image:url('assets/images/cards/artigianalita.jpg')">
             <h4>Artigianalità</h4>
-            <p>Ogni tomaia lavorata con cura certosina da mani esperte, nel rispetto della tradizione italiana.</p>
+            <p>Ogni tomaia nasce dalla cura certosina di mani esperte, nel pieno rispetto di una tradizione artigianale italiana tramandata nel tempo.</p>
           </div>
-          <div class="value-card">
-            <div class="value-icon">◈</div>
+          <div class="value-card" style="background-image:url('assets/images/cards/design.jpg')">
             <h4>Design</h4>
-            <p>Forme eleganti e linee raffinate che esaltano la bellezza di ogni calzatura femminile.</p>
+            <p>Forme eleganti e proporzioni raffinate che esaltano l'identità estetica di ogni calzatura, dal campione alla produzione in serie.</p>
           </div>
-          <div class="value-card">
-            <div class="value-icon">⬡</div>
+          <div class="value-card" style="background-image:url('assets/images/cards/innovazione.jpg')">
             <h4>Innovazione</h4>
-            <p>Macchinari di ultima generazione per lavorazioni di precisione assoluta.</p>
+            <p>Tecnologie di ultima generazione integrate al savoir-faire artigianale per lavorazioni di precisione assoluta su ogni tipo di materiale.</p>
           </div>
-          <div class="value-card">
-            <div class="value-icon">◉</div>
+          <div class="value-card" style="background-image:url('assets/images/cards/qualita.jpg')">
             <h4>Qualità</h4>
-            <p>Controllo qualità puntuale su ogni tomaia per garantire l'eccellenza del prodotto.</p>
+            <p>Ogni tomaia è sottoposta a un controllo rigoroso prima della consegna, per garantire standard elevati che soddisfino i leader del lusso mondiale.</p>
           </div>
         </div>
       </div>
 
       <!-- colonna destra -->
       <div class="chi-right">
-        <div class="info-panel">
+        <div class="info-panel" style="background-image:url('assets/images/cards/certificazioni.jpg')">
           <h3>Certificazioni & Audit</h3>
           <p>
             A garanzia della nostra affidabilità e trasparenza, il Tomaificio L.G. SHOES SRL ha già sostenuto con successo gli <strong>Audit dei gruppi LVMH e Kering</strong>, risultando pienamente conforme agli standard internazionali richiesti dai leader del settore.
@@ -810,7 +901,7 @@
           </div>
         </div>
 
-        <div class="info-panel">
+        <div class="info-panel" style="background-image:url('assets/images/cards/perche-sceglierci.jpg')">
           <h3>Perché sceglierci</h3>
           <p>
             Ogni commessa viene trattata con la massima professionalità e il rigoroso rispetto dei tempi di consegna. La nostra struttura familiare ci permette di essere flessibili, reattivi e totalmente dedicati alle esigenze del cliente, garantendo al tempo stesso gli standard internazionali richiesti dai leader del settore moda.
@@ -901,45 +992,61 @@
       Il nostro processo produttivo è supportato da macchinari di ultima generazione e garantisce la massima qualità e precisione in ogni fase lavorativa, dalla materia prima alla tomaia finita.
     </p>
     <div class="prod-grid">
-      <div class="prod-step" style="background-image:url('1.png')">
+      <div class="prod-step" style="background-image:url('assets/images/process/1.png')">
         <div class="prod-num">01</div>
-        <h4>Taglio</h4>
-        <p>Computerizzato, a trancia e a mano su ogni tipo di materiale, per la massima precisione e resa.</p>
+        <div class="prod-step-content">
+          <h4>Taglio</h4>
+          <p>Computerizzato, a trancia e a mano su ogni tipo di materiale, per la massima precisione e resa.</p>
+        </div>
       </div>
-      <div class="prod-step" style="background-image:url('2.png')">
+      <div class="prod-step" style="background-image:url('assets/images/process/2.png')">
         <div class="prod-num">02</div>
-        <h4>Scarnitura e Sbassatura</h4>
-        <p>Lavorazioni curate nel minimo dettaglio per spessori impeccabili e una vestibilità perfetta.</p>
+        <div class="prod-step-content">
+          <h4>Scarnitura e Sbassatura</h4>
+          <p>Lavorazioni curate nel minimo dettaglio per spessori impeccabili e una vestibilità perfetta.</p>
+        </div>
       </div>
-      <div class="prod-step" style="background-image:url('3.png')">
+      <div class="prod-step" style="background-image:url('assets/images/process/3.png')">
         <div class="prod-num">03</div>
-        <h4>Cambratura</h4>
-        <p>Modellazione su qualsiasi pellame, dal camoscio alla vernice, con risultati di assoluta qualità.</p>
+        <div class="prod-step-content">
+          <h4>Cambratura</h4>
+          <p>Modellazione su qualsiasi pellame, dal camoscio alla vernice, con risultati di assoluta qualità.</p>
+        </div>
       </div>
-      <div class="prod-step" style="background-image:url('4.png')">
+      <div class="prod-step" style="background-image:url('assets/images/process/4.png')">
         <div class="prod-num">04</div>
-        <h4>Timbratura</h4>
-        <p>Marcatura di precisione sia a caldo che a freddo, per un'identificazione impeccabile del prodotto.</p>
+        <div class="prod-step-content">
+          <h4>Timbratura</h4>
+          <p>Marcatura di precisione sia a caldo che a freddo, per un'identificazione impeccabile del prodotto.</p>
+        </div>
       </div>
-      <div class="prod-step" style="background-image:url('5.png')">
+      <div class="prod-step" style="background-image:url('assets/images/process/5.png')">
         <div class="prod-num">05</div>
-        <h4>Incollaggio e Accoppiatura</h4>
-        <p>Applicazione accurata di collanti (anche all'acqua) per la perfetta adesione di rinforzi e componenti.</p>
+        <div class="prod-step-content">
+          <h4>Incollaggio e Accoppiatura</h4>
+          <p>Applicazione accurata di collanti, anche all'acqua, per la perfetta adesione di rinforzi e componenti.</p>
+        </div>
       </div>
-      <div class="prod-step" style="background-image:url('6.png')">
+      <div class="prod-step" style="background-image:url('assets/images/process/6.png')">
         <div class="prod-num">06</div>
-        <h4>Giunteria e Cucitura</h4>
-        <p>Assemblaggio di alta precisione affidato a personale altamente specializzato e formato.</p>
+        <div class="prod-step-content">
+          <h4>Giunteria e Cucitura</h4>
+          <p>Assemblaggio di alta precisione affidato a personale altamente specializzato e formato.</p>
+        </div>
       </div>
-      <div class="prod-step" style="background-image:url('7.png')">
+      <div class="prod-step" style="background-image:url('assets/images/process/7.png')">
         <div class="prod-num">07</div>
-        <h4>Lissatura</h4>
-        <p>Rifinitura impeccabile del bordo a taglio vivo per un risultato esteticamente perfetto.</p>
+        <div class="prod-step-content">
+          <h4>Lissatura</h4>
+          <p>Rifinitura impeccabile del bordo a taglio vivo per un risultato esteticamente curato.</p>
+        </div>
       </div>
-      <div class="prod-step" style="background-image:url('8.png')">
+      <div class="prod-step" style="background-image:url('assets/images/process/8.png')">
         <div class="prod-num">08</div>
-        <h4>Controllo Qualità</h4>
-        <p>Verifica puntuale di ogni singola tomaia per garantire l'eccellenza assoluta del prodotto finito.</p>
+        <div class="prod-step-content">
+          <h4>Controllo Qualità</h4>
+          <p>Verifica puntuale di ogni singola tomaia per garantire l'eccellenza assoluta del prodotto finito.</p>
+        </div>
       </div>
     </div>
   </div>
@@ -1119,48 +1226,81 @@
   </div>
 </section>
 
-<!-- ══════════════ PUNTO A CROCE PRE-FOOTER ══════════════ -->
-<div class="stitch-unravel" aria-hidden="true">
-  <svg viewBox="0 0 1450 64" preserveAspectRatio="none">
-    <defs>
-      <pattern id="xstitch" x="0" y="4" width="36" height="36" patternUnits="userSpaceOnUse">
-        <line x1="5"  y1="5"  x2="27" y2="27" stroke="#c9a96e" stroke-width="2" stroke-linecap="round"/>
-        <line x1="27" y1="5"  x2="5"  y2="27" stroke="#c9a96e" stroke-width="2" stroke-linecap="round"/>
-      </pattern>
-      <!-- dissolve orizzontale (sx pieno → dx trasparente) + sotto più sbiadito -->
-      <linearGradient id="xfade-h" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0%"   stop-color="white" stop-opacity="1"/>
-        <stop offset="55%"  stop-color="white" stop-opacity="0.85"/>
-        <stop offset="85%"  stop-color="white" stop-opacity="0.3"/>
-        <stop offset="100%" stop-color="white" stop-opacity="0"/>
-      </linearGradient>
-      <linearGradient id="xfade-v" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0%"   stop-color="white" stop-opacity="0"/>
-        <stop offset="100%" stop-color="white" stop-opacity="0.7"/>
-      </linearGradient>
-      <mask id="xmask-h"><rect x="0" y="0" width="1450" height="64" fill="url(#xfade-h)"/></mask>
-      <mask id="xmask-v"><rect x="0" y="0" width="1450" height="64" fill="url(#xfade-v)"/></mask>
-    </defs>
-    <!-- strato base: dissolve orizzontale -->
-    <rect x="0" y="0" width="1450" height="64" fill="url(#xstitch)" opacity=".78" mask="url(#xmask-h)"/>
-    <!-- strato verticale: oscura le croci in basso, più opache quelle in alto -->
-    <rect x="0" y="0" width="1450" height="64" fill="var(--dark)" opacity=".52" mask="url(#xmask-v)"/>
+<!-- ── CUCITURA PRE-FOOTER ── -->
+<div class="stitch-divider" data-stitch aria-hidden="true" style="background:var(--dark);">
+  <svg viewBox="0 0 1450 72" preserveAspectRatio="none">
+    <line class="stitch-line" x1="0" y1="36" x2="1450" y2="36"
+      stroke="#c9a96e" stroke-width="2.5" stroke-dasharray="14 8" opacity=".75"/>
+    <line class="stitch-shine" x1="0" y1="36" x2="1450" y2="36"
+      stroke="#ffe48a" stroke-width="2.5" opacity=".0"/>
+    <g class="stitch-scissors">
+      <circle cx="50" cy="36" r="5" fill="#c9a96e" opacity=".9"/>
+      <g class="sc-blade-up">
+        <circle cx="12" cy="12" r="14" fill="none" stroke="#c9a96e" stroke-width="3"/>
+        <line x1="24" y1="21" x2="50" y2="36" stroke="#c9a96e" stroke-width="3" stroke-linecap="round"/>
+        <line x1="50" y1="36" x2="92" y2="44" stroke="#c9a96e" stroke-width="3" stroke-linecap="round"/>
+      </g>
+      <g class="sc-blade-dn">
+        <circle cx="12" cy="60" r="14" fill="none" stroke="#c9a96e" stroke-width="3"/>
+        <line x1="24" y1="51" x2="50" y2="36" stroke="#c9a96e" stroke-width="3" stroke-linecap="round"/>
+        <line x1="50" y1="36" x2="92" y2="28" stroke="#c9a96e" stroke-width="3" stroke-linecap="round"/>
+      </g>
+    </g>
   </svg>
 </div>
 
 <!-- ══════════════ FOOTER ══════════════ -->
 <footer>
-  <div class="footer-logo">L.G. Shoes</div>
-  <div class="footer-company">Tomaificio L.G. Shoes SRL</div>
-  <nav class="footer-links">
-    <a href="#home">Home</a>
-    <a href="#chi-siamo">Chi Siamo</a>
-    <a href="#produzione">Produzione</a>
-    <a href="#contatti">Contatti</a>
-  </nav>
-  <hr class="footer-divider" />
-  <p class="footer-copy">© 2025 Tomaificio L.G. Shoes SRL – Tutti i diritti riservati</p>
-  <p class="footer-piva">P.IVA 09049831218 · Via Cristoforo Colombo, 15 – 80018 Mugnano di Napoli (NA)</p>
+  <div class="footer-inner">
+    <div class="footer-top">
+
+      <!-- Brand -->
+      <div class="footer-brand">
+        <img src="assets/images/logo/logoLGshoes.png" alt="LG Shoes Logo" class="footer-brand-logo" />
+        <span class="footer-company">Tomaificio · Dal 1990</span>
+        <p>Artigianalità italiana al servizio dei più grandi brand del lusso mondiale. Tomaie su misura per calzature femminili d'alta gamma.</p>
+      </div>
+
+      <!-- Navigazione -->
+      <div class="footer-col">
+        <h5>Navigazione</h5>
+        <ul>
+          <li><a href="#home">Home</a></li>
+          <li><a href="#chi-siamo">Chi Siamo</a></li>
+          <li><a href="#produzione">Processo Produttivo</a></li>
+          <li><a href="#contatti">Contatti</a></li>
+        </ul>
+      </div>
+
+      <!-- Contatti -->
+      <div class="footer-col">
+        <h5>Contattaci</h5>
+        <div class="footer-contact-btns">
+          <a href="tel:+393398344344" class="footer-btn">
+            <span>📞</span> 339 834 4344
+          </a>
+          <a href="tel:+393389048471" class="footer-btn">
+            <span>📞</span> 338 904 8471
+          </a>
+          <a href="mailto:enza.carrino.76@gmail.com" class="footer-btn">
+            <span>✉</span> enza.carrino.76@gmail.com
+          </a>
+          <a href="https://wa.me/393398344344" target="_blank" rel="noopener" class="footer-btn">
+            <span>💬</span> WhatsApp
+          </a>
+          <a href="https://maps.google.com/?q=Via+Cristoforo+Colombo+15+Mugnano+di+Napoli" target="_blank" rel="noopener" class="footer-btn">
+            <span>📍</span> Via C. Colombo 15, Mugnano (NA)
+          </a>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="footer-bottom">
+      <p class="footer-copy">© 1990–2026 Tomaificio L.G. Shoes SRL – Tutti i diritti riservati</p>
+      <p class="footer-piva">P.IVA 09049831218 · 80018 Mugnano di Napoli (NA)</p>
+    </div>
+  </div>
 </footer>
 
 <!-- ══════════════ SCRIPTS ══════════════ -->
