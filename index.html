@@ -418,14 +418,15 @@
     .prod-intro { color: rgba(255,255,255,0.55); max-width: 640px; margin-bottom: 3.5rem; font-size: 0.97rem; }
     .prod-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
       gap: 1px;
       background: rgba(201,169,110,0.08);
       border: 1px solid rgba(201,169,110,0.08);
     }
     .prod-step {
       position: relative;
-      padding: 2rem 1.6rem;
+      padding: 2.2rem 2rem 4rem;
+      min-height: 240px;
       background-size: cover;
       background-position: center;
       overflow: hidden;
@@ -434,27 +435,78 @@
     .prod-step::before {
       content: '';
       position: absolute; inset: 0;
-      background: rgba(10,10,10,0.72);
+      background: rgba(10,10,10,0.74);
       transition: background .3s;
     }
-    .prod-step:hover::before { background: rgba(10,10,10,0.55); }
+    .prod-step:hover::before { background: rgba(10,10,10,0.58); }
     .prod-step > * { position: relative; z-index: 1; }
     .prod-num {
-      position: absolute; top: -0.5rem; right: 1rem;
+      position: absolute; top: -0.5rem; right: 1.2rem;
       font-family: var(--font-serif); font-size: 5.5rem;
-      color: rgba(201,169,110,0.12); font-style: italic;
+      color: rgba(201,169,110,0.10); font-style: italic;
       line-height: 1; pointer-events: none; z-index: 0;
       letter-spacing: -2px;
     }
-    .prod-step-content { position: relative; z-index: 1; padding-top: .5rem; }
+    .prod-step-content { position: relative; z-index: 1; padding-top: .6rem; }
     .prod-step h4 {
-      font-family: var(--font-serif); font-size: 1rem;
+      font-family: var(--font-serif); font-size: 1.08rem;
       font-style: italic; font-weight: normal;
-      color: var(--gold); margin-bottom: .55rem; letter-spacing: .3px;
+      color: var(--gold); margin-bottom: .7rem; letter-spacing: .3px;
     }
     .prod-step p {
-      font-size: 0.84rem; color: rgba(255,255,255,0.65);
-      line-height: 1.75; letter-spacing: .1px;
+      font-size: 0.85rem; color: rgba(255,255,255,0.62);
+      line-height: 1.8; letter-spacing: .1px;
+    }
+    /* card cliccabili */
+    a.prod-step {
+      display: block; text-decoration: none; cursor: pointer;
+    }
+    a.prod-step::after {
+      content: '▶  Guarda su YouTube';
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: .75rem 2rem;
+      font-size: 0.62rem; letter-spacing: 2px; text-transform: uppercase;
+      color: rgba(201,169,110,0.5); z-index: 1;
+      border-top: 1px solid rgba(201,169,110,0.12);
+      transition: color .25s, background .25s;
+    }
+    a.prod-step:hover::after {
+      color: var(--gold);
+      background: rgba(201,169,110,0.05);
+    }
+    /* avviso youtube */
+    .prod-yt-notice {
+      display: flex; align-items: center; gap: .6rem;
+      margin-bottom: 1.4rem; padding: .7rem 1rem;
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: 4px;
+      font-size: 0.75rem; letter-spacing: .8px;
+      color: rgba(255,255,255,0.45);
+    }
+    .prod-yt-notice span { font-size: 1rem; flex-shrink: 0; }
+    /* sezione approfondimento video */
+    .prod-video-wrap {
+      margin-top: 4rem; padding-top: 3.5rem;
+      border-top: 1px solid rgba(201,169,110,0.12);
+    }
+    .prod-video-wrap .section-label { color: rgba(201,169,110,0.6); }
+    .prod-video-title {
+      font-family: var(--font-serif); font-size: 1.6rem;
+      font-style: italic; color: var(--white);
+      margin: .5rem 0 .8rem; letter-spacing: .5px;
+    }
+    .prod-video-desc {
+      font-size: 0.88rem; color: rgba(255,255,255,0.45);
+      max-width: 580px; margin-bottom: 2rem; line-height: 1.7;
+    }
+    .prod-video-frame {
+      position: relative; width: 100%; padding-bottom: 56.25%;
+      background: #000; border-radius: 4px; overflow: hidden;
+      border: 1px solid rgba(201,169,110,0.15);
+    }
+    .prod-video-frame iframe {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      border: none;
     }
 
     /* ════════════════════════════════
@@ -601,6 +653,7 @@
     .footer-piva { font-size: 0.65rem; color: rgba(255,255,255,0.13); }
     @media (max-width: 768px) {
       .footer-top { grid-template-columns: 1fr; gap: 2rem; text-align: center; }
+      .footer-brand-logo { margin: 0 auto; }
       .footer-contact-btns { align-items: center; }
       .footer-bottom { flex-direction: column; text-align: center; }
     }
@@ -753,7 +806,7 @@
 <div class="mobile-menu" id="mobileMenu" role="dialog" aria-modal="true" aria-label="Menu di navigazione">
   <button class="mobile-menu-close" id="mobileClose" aria-label="Chiudi menu">&#x2715;</button>
   <div class="mobile-menu-logo">
-    <img src="assets/images/logo/logoLGshoes.png" alt="LG Shoes Logo" />
+    <img src="assets/images/logo/logovuoto.png" alt="LG Shoes Logo" />
   </div>
   <ul class="mobile-menu-links">
     <li><a href="#home">Home</a></li>
@@ -772,7 +825,7 @@
 <nav class="navbar">
   <div class="nav-inner">
     <a href="#home" class="nav-logo">
-      <img src="assets/images/logo/logoLGshoes.png" alt="LG Shoes Logo" />
+      <img src="assets/images/logo/logovuoto.png" alt="LG Shoes Logo" />
     </a>
 
     <ul class="nav-links" id="navLinks">
@@ -857,7 +910,7 @@
         <h2 class="section-title">Passione familiare,<br>qualità mondiale</h2>
         <div class="section-line"></div>
         <p>
-          Il <strong>Tomaificio L.G. SHOES SRL</strong> è una realtà d'eccellenza del distretto calzaturiero campano, specializzata nella fabbricazione di <strong>tomaie per calzature femminili di alta gamma</strong>. Una tomaia è la parte superiore della scarpa — il cuore estetico e strutturale di ogni calzatura — e la nostra expertise esclusiva in questo campo ci rende un fornitore d'élite per i brand del lusso internazionale.
+          Il <strong>Tomaificio L.G. SHOES SRL</strong> è una realtà d'eccellenza del distretto calzaturiero campano, specializzata nella fabbricazione di <strong>tomaie per calzature femminili di alta gamma</strong>. Una tomaia è la parte superiore della scarpa il cuore estetico e strutturale di ogni calzatura e la nostra expertise esclusiva in questo campo ci rende un fornitore d'élite per i brand del lusso internazionale.
         </p>
         <p>
           La nostra è un'azienda a carattere familiare, guidata dalla <strong>Sig.ra Carrino Vincenza</strong>, con decenni di esperienza nella lavorazione di pellami pregiati: dalla pelle liscia al camoscio, dalla vernice al nabuk, fino ai materiali tecnici più innovativi. Ogni commessa è seguita direttamente dalla direzione, con un controllo totale su ogni singola fase produttiva.
@@ -991,64 +1044,89 @@
     <p class="prod-intro">
       Il nostro processo produttivo è supportato da macchinari di ultima generazione e garantisce la massima qualità e precisione in ogni fase lavorativa, dalla materia prima alla tomaia finita.
     </p>
+    <div class="prod-yt-notice">
+      <span>▶</span>
+      Clicca su ogni fase per approfondire direttamente su YouTube — si aprirà una nuova scheda.
+    </div>
     <div class="prod-grid">
-      <div class="prod-step" style="background-image:url('assets/images/process/1.png')">
+      <!-- ⚠️ Sostituisci VIDEO_ID con l'ID reale del video YouTube (es. dQw4w9WgXcQ) -->
+      <!-- ⚠️ Sostituisci i valori t=0 con i secondi esatti di ogni fase nel video -->
+      <a class="prod-step" href="https://www.youtube.com/watch?v=VIDEO_ID&t=0s" target="_blank" rel="noopener" style="background-image:url('assets/images/process/1.png')">
         <div class="prod-num">01</div>
         <div class="prod-step-content">
           <h4>Taglio</h4>
           <p>Computerizzato, a trancia e a mano su ogni tipo di materiale, per la massima precisione e resa.</p>
         </div>
-      </div>
-      <div class="prod-step" style="background-image:url('assets/images/process/2.png')">
+      </a>
+      <a class="prod-step" href="https://www.youtube.com/watch?v=VIDEO_ID&t=0s" target="_blank" rel="noopener" style="background-image:url('assets/images/process/2.png')">
         <div class="prod-num">02</div>
         <div class="prod-step-content">
           <h4>Scarnitura e Sbassatura</h4>
           <p>Lavorazioni curate nel minimo dettaglio per spessori impeccabili e una vestibilità perfetta.</p>
         </div>
-      </div>
-      <div class="prod-step" style="background-image:url('assets/images/process/3.png')">
+      </a>
+      <a class="prod-step" href="https://www.youtube.com/watch?v=VIDEO_ID&t=0s" target="_blank" rel="noopener" style="background-image:url('assets/images/process/3.png')">
         <div class="prod-num">03</div>
         <div class="prod-step-content">
           <h4>Cambratura</h4>
           <p>Modellazione su qualsiasi pellame, dal camoscio alla vernice, con risultati di assoluta qualità.</p>
         </div>
-      </div>
-      <div class="prod-step" style="background-image:url('assets/images/process/4.png')">
+      </a>
+      <a class="prod-step" href="https://www.youtube.com/watch?v=VIDEO_ID&t=0s" target="_blank" rel="noopener" style="background-image:url('assets/images/process/4.png')">
         <div class="prod-num">04</div>
         <div class="prod-step-content">
           <h4>Timbratura</h4>
           <p>Marcatura di precisione sia a caldo che a freddo, per un'identificazione impeccabile del prodotto.</p>
         </div>
-      </div>
-      <div class="prod-step" style="background-image:url('assets/images/process/5.png')">
+      </a>
+      <a class="prod-step" href="https://www.youtube.com/watch?v=VIDEO_ID&t=0s" target="_blank" rel="noopener" style="background-image:url('assets/images/process/5.png')">
         <div class="prod-num">05</div>
         <div class="prod-step-content">
           <h4>Incollaggio e Accoppiatura</h4>
           <p>Applicazione accurata di collanti, anche all'acqua, per la perfetta adesione di rinforzi e componenti.</p>
         </div>
-      </div>
-      <div class="prod-step" style="background-image:url('assets/images/process/6.png')">
+      </a>
+      <a class="prod-step" href="https://www.youtube.com/watch?v=VIDEO_ID&t=0s" target="_blank" rel="noopener" style="background-image:url('assets/images/process/6.png')">
         <div class="prod-num">06</div>
         <div class="prod-step-content">
           <h4>Giunteria e Cucitura</h4>
           <p>Assemblaggio di alta precisione affidato a personale altamente specializzato e formato.</p>
         </div>
-      </div>
-      <div class="prod-step" style="background-image:url('assets/images/process/7.png')">
+      </a>
+      <a class="prod-step" href="https://www.youtube.com/watch?v=VIDEO_ID&t=0s" target="_blank" rel="noopener" style="background-image:url('assets/images/process/7.png')">
         <div class="prod-num">07</div>
         <div class="prod-step-content">
           <h4>Lissatura</h4>
           <p>Rifinitura impeccabile del bordo a taglio vivo per un risultato esteticamente curato.</p>
         </div>
-      </div>
-      <div class="prod-step" style="background-image:url('assets/images/process/8.png')">
+      </a>
+      <a class="prod-step" href="https://www.youtube.com/watch?v=VIDEO_ID&t=0s" target="_blank" rel="noopener" style="background-image:url('assets/images/process/8.png')">
         <div class="prod-num">08</div>
         <div class="prod-step-content">
           <h4>Controllo Qualità</h4>
           <p>Verifica puntuale di ogni singola tomaia per garantire l'eccellenza assoluta del prodotto finito.</p>
         </div>
+      </a>
+    </div>
+
+    <!-- Sezione approfondimento video -->
+    <div class="prod-video-wrap">
+      <p class="section-label">Approfondimento</p>
+      <h3 class="prod-video-title">Il processo produttivo in video</h3>
+      <p class="prod-video-desc">
+        Un viaggio esclusivo all'interno del nostro tomaificio: le mani, i macchinari e la dedizione quotidiana che trasformano la materia prima in alta artigianalità italiana.
+      </p>
+      <!-- ⚠️ Sostituisci VIDEO_ID con l'ID reale del video YouTube -->
+      <div class="prod-video-frame">
+        <iframe
+          src="https://www.youtube.com/embed/VIDEO_ID?autoplay=1&mute=1&rel=0&modestbranding=1"
+          title="Processo produttivo LG Shoes"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen>
+        </iframe>
       </div>
     </div>
+
   </div>
 </section>
 
@@ -1256,7 +1334,7 @@
 
       <!-- Brand -->
       <div class="footer-brand">
-        <img src="assets/images/logo/logoLGshoes.png" alt="LG Shoes Logo" class="footer-brand-logo" />
+        <img src="assets/images/logo/logovuoto.png" alt="LG Shoes Logo" class="footer-brand-logo" />
         <span class="footer-company">Tomaificio · Dal 1990</span>
         <p>Artigianalità italiana al servizio dei più grandi brand del lusso mondiale. Tomaie su misura per calzature femminili d'alta gamma.</p>
       </div>
