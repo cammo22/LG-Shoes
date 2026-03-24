@@ -145,7 +145,7 @@
       opacity: 1; transform: translateY(0);
     }
     .mobile-menu-hero-logo img {
-      width: 180px; height: auto;
+      width: min(180px, 45vw); height: auto;
       background: rgba(255,255,255,0.93);
       border-radius: 10px;
       padding: 10px 16px;
@@ -681,10 +681,11 @@
     }
     /* logo hero */
     .hero-logo-img {
-      max-width: min(380px, 80vw);
+      max-width: 380px;
+      width: 70vw;
       height: auto;
       display: block;
-      margin: 0 auto 2rem;
+      margin: 0 auto 1.5rem;
       background: rgba(255,255,255,0.93);
       border-radius: 10px;
       padding: 12px 20px;
@@ -745,20 +746,42 @@
     }
     @media (max-width: 768px) {
       .burger { display: flex; }
-      .nav-links { display: none; }        /* hidden on mobile – use full-screen menu */
+      .nav-links { display: none; }
       .nav-inner { padding: 0 1rem; }
       section { padding: 70px 1.2rem; }
       .values-grid { grid-template-columns: 1fr; }
       .form-row { grid-template-columns: 1fr; }
       .audit-badges { flex-wrap: wrap; }
+      /* hero mobile */
+      #home { min-height: 100vh; height: auto; }
+      .hero-content { padding: 1.5rem 1rem; }
+      .hero-logo-img { width: 60vw; max-width: 260px; margin-bottom: 1.2rem; padding: 10px 16px; border-radius: 8px; }
+      .hero-badge { font-size: 0.58rem; letter-spacing: 2px; padding: 5px 14px; margin-bottom: 1.2rem; }
+      .hero-sub { font-size: 0.88rem; margin-bottom: 1.8rem; }
+      .hero-cta { font-size: 0.72rem; padding: 12px 28px; }
+      .craft-tag { bottom: 6%; }
+      .craft-tag span { font-size: .7rem; letter-spacing: 1.5px; }
+      /* stitch hero non si sovrappone */
+      .stitch-hero { bottom: -1px; }
+      /* footer mobile logo */
+      .footer-brand-logo { height: 100px; }
     }
     @media (max-width: 480px) {
       .social-buttons { gap: .5rem; }
       .social-btn { font-size: 0.72rem; padding: 8px 12px; }
       .prod-grid { grid-template-columns: 1fr 1fr; }
+      .hero-logo-img { width: 55vw; max-width: 220px; }
+      .hero-badge { font-size: 0.52rem; }
+      .footer-phones-row { flex-direction: column; max-width: 100%; }
+      .footer-phone-item { flex: none; }
+      .footer-brand-logo { height: 80px; }
+      .prod-step { padding: 1.8rem 1.4rem 3.5rem; min-height: 200px; }
+      .prod-step h4 { font-size: 0.95rem; }
+      .prod-step p { font-size: 0.8rem; }
     }
     @media (max-width: 360px) {
       .prod-grid { grid-template-columns: 1fr; }
+      .hero-logo-img { width: 50vw; max-width: 180px; }
     }
 
     /* ════════════════════════════════
@@ -898,6 +921,7 @@
   <div class="mobile-sep"></div>
   <div class="mobile-menu-footer">
     <a href="tel:+393398344344">339 834 4344</a>
+    <a href="tel:+393331479998">333 147 9998</a>
     <a href="mailto:enza.carrino.76@gmail.com">enza.carrino.76@gmail.com</a>
   </div>
 </div>
@@ -928,7 +952,7 @@
 <section id="home">
   <div class="hero-content">
     <img src="assets/images/logo/logofooter.png" alt="LG Shoes Logo" class="hero-logo-img" />
-    <div class="hero-badge">Tomaificio · Mugnano di Napoli · Dal 1990</div>
+    <div class="hero-badge">Tomaificio · Mugnano di Napoli · Dal 2018</div>
     <p class="hero-sub">
       Artigianalità, design e innovazione al servizio dei più grandi marchi del lusso mondiale.
     </p>
@@ -1417,7 +1441,7 @@
       <!-- Brand -->
       <div class="footer-brand">
         <img src="assets/images/logo/logovuoto.png" alt="LG Shoes Logo" class="footer-brand-logo" />
-        <span class="footer-company">Tomaificio · Dal 1990</span>
+        <span class="footer-company">Tomaificio · Dal 2018</span>
         <p>Artigianalità italiana al servizio dei più grandi brand del lusso mondiale. Tomaie per calzature femminili d'alta gamma.</p>
       </div>
 
@@ -1447,6 +1471,9 @@
               <span class="footer-phone-label">Ufficio</span>
               <a href="tel:+390815558545" class="footer-btn">
                 <span>📞</span> 081 555 8545
+              </a>
+              <a href="tel:+393331479998" class="footer-btn">
+                <span>📞</span> 333 147 9998
               </a>
             </div>
           </div>
