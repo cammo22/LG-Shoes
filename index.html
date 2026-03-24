@@ -847,49 +847,109 @@
     .stitch-line  { stroke-dasharray: 1450; stroke-dashoffset: 1450; }
     .stitch-shine { opacity: 0; stroke-dasharray: 8 52; }
 
-    /* forbici — fill-box: il pivot si sposta con l'elemento (essenziale per forbici mobili) */
-    .stitch-scissors { opacity: 0.8; }
-    /* lama superiore: pivot a 55% 77% della fill-box */
+    /* forbici — fill-box: il pivot si sposta con l'elemento */
+    .stitch-scissors {
+      opacity: 0.8;
+      filter: drop-shadow(0 0 3px rgba(201,169,110,0.0));
+      transition: filter .3s;
+    }
+    .stitch-scissors.travelling {
+      filter: drop-shadow(0 0 6px rgba(201,169,110,0.5));
+    }
+    /* perno dorato — respiro */
+    .stitch-scissors > circle {
+      animation: pivot-pulse 2s ease-in-out infinite;
+    }
+    @keyframes pivot-pulse {
+      0%,100% { opacity: .7; }
+      50%      { opacity: 1; }
+    }
+    /* lama superiore */
     .sc-blade-up {
       transform-box: fill-box; transform-origin: 55% 77%;
-      animation: sc-idle-up 2.5s ease-in-out infinite;
+      animation: sc-idle-up 3s cubic-bezier(.45,.05,.55,.95) infinite;
     }
-    /* lama inferiore: pivot a 55% 23% della fill-box */
+    /* lama inferiore */
     .sc-blade-dn {
       transform-box: fill-box; transform-origin: 55% 23%;
-      animation: sc-idle-dn 2.5s ease-in-out infinite;
+      animation: sc-idle-dn 3s cubic-bezier(.45,.05,.55,.95) infinite;
     }
-    /* forbici slim (divider 4) — stesse proporzioni, stessi pivot */
     .stitch-divider[data-slim] .sc-blade-up { transform-origin: 55% 77%; }
     .stitch-divider[data-slim] .sc-blade-dn { transform-origin: 55% 23%; }
+    /* idle — apertura/chiusura morbida */
     @keyframes sc-idle-up {
-      0%,100% { transform: rotate(0deg); }
-      50%      { transform: rotate(-16deg); }
+      0%   { transform: rotate(0deg); }
+      35%  { transform: rotate(-8deg); }
+      65%  { transform: rotate(-3deg); }
+      100% { transform: rotate(0deg); }
     }
     @keyframes sc-idle-dn {
-      0%,100% { transform: rotate(0deg); }
-      50%      { transform: rotate(16deg); }
+      0%   { transform: rotate(0deg); }
+      35%  { transform: rotate(8deg); }
+      65%  { transform: rotate(3deg); }
+      100% { transform: rotate(0deg); }
     }
-    /* forbici che tagliano — molto enfatizzato */
+    /* in viaggio — piccoli scatti contenuti */
+    .stitch-scissors.snipping .sc-blade-up {
+      animation: sc-snip-up 0.5s ease-in-out infinite;
+    }
+    .stitch-scissors.snipping .sc-blade-dn {
+      animation: sc-snip-dn 0.5s ease-in-out infinite;
+    }
+    @keyframes sc-snip-up {
+      0%,100% { transform: rotate(-3deg); }
+      45%      { transform: rotate(-18deg); }
+    }
+    @keyframes sc-snip-dn {
+      0%,100% { transform: rotate(3deg); }
+      45%      { transform: rotate(18deg); }
+    }
+    /* taglio finale — drammatico */
     .stitch-scissors.cutting .sc-blade-up {
-      animation: sc-cut-up 0.52s cubic-bezier(.22,.68,.36,1.2) 4;
+      animation: sc-cut-up 0.6s cubic-bezier(.22,.68,.36,1.18) 3;
     }
     .stitch-scissors.cutting .sc-blade-dn {
-      animation: sc-cut-dn 0.52s cubic-bezier(.22,.68,.36,1.2) 4;
+      animation: sc-cut-dn 0.6s cubic-bezier(.22,.68,.36,1.18) 3;
     }
     @keyframes sc-cut-up {
-      0%   { transform: rotate(0deg)  scale(1); }
-      25%  { transform: rotate(18deg) scale(1.08); }
-      60%  { transform: rotate(-62deg) scale(1.12); }
-      85%  { transform: rotate(-62deg) scale(1.12); }
-      100% { transform: rotate(0deg)  scale(1); }
+      0%   { transform: rotate(0deg) scale(1); }
+      15%  { transform: rotate(22deg) scale(1.06); }
+      45%  { transform: rotate(-58deg) scale(1.14); }
+      70%  { transform: rotate(-58deg) scale(1.14); }
+      100% { transform: rotate(0deg) scale(1); }
     }
     @keyframes sc-cut-dn {
-      0%   { transform: rotate(0deg)  scale(1); }
-      25%  { transform: rotate(-18deg) scale(1.08); }
-      60%  { transform: rotate(62deg) scale(1.12); }
-      85%  { transform: rotate(62deg) scale(1.12); }
-      100% { transform: rotate(0deg)  scale(1); }
+      0%   { transform: rotate(0deg) scale(1); }
+      15%  { transform: rotate(-22deg) scale(1.06); }
+      45%  { transform: rotate(58deg) scale(1.14); }
+      70%  { transform: rotate(58deg) scale(1.14); }
+      100% { transform: rotate(0deg) scale(1); }
+    }
+    /* scintille al taglio */
+    @keyframes spark-burst {
+      0%   { opacity: 1; transform: scale(0.3); }
+      50%  { opacity: .8; transform: scale(1.2); }
+      100% { opacity: 0; transform: scale(1.6); }
+    }
+    .stitch-spark {
+      position: absolute; pointer-events: none;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: radial-gradient(circle, #ffe48a 0%, #c9a96e 60%, transparent 100%);
+      opacity: 0;
+    }
+    .stitch-spark.burst {
+      animation: spark-burst 0.5s ease-out forwards;
+    }
+    /* filo vibra al taglio */
+    @keyframes thread-shake {
+      0%,100% { transform: translateY(0); }
+      20%  { transform: translateY(-2px); }
+      40%  { transform: translateY(3px); }
+      60%  { transform: translateY(-1.5px); }
+      80%  { transform: translateY(1px); }
+    }
+    .stitch-line.shaking {
+      animation: thread-shake 0.4s ease-out;
     }
 
 
@@ -1584,20 +1644,36 @@
      • quando arrivano a DX: forbici tagliano e spariscono
      • poi ago torna DX→SX, loop
   ══════════════════════════════════ */
-  const TRAVEL_DUR    = 5500;  // ms andata ago sx→dx
-  const SC_DELAY      = 900;   // ms ritardo comparsa forbici
-  const SC_TRAVEL_DUR = 5200;  // forbici più lente → arrivano ~600ms dopo l'ago
-  const RETURN_DUR    = 3200;  // ms ritorno dx→sx
-  const CUT_DUR       = 2100;  // ms taglio (4 × 0.52s) — molto enfatizzato
-  const HIDE_DUR      = 400;   // ms fade forbici
-  const PAUSE_RESET   = 500;   // ms pausa
+  const TRAVEL_DUR    = 7000;  // ms andata filo sx→dx
+  const SC_DELAY      = 800;   // ms ritardo comparsa forbici
+  const SC_TRAVEL_DUR = 6800;  // forbici seguono il filo
+  const SC_STOP       = 0.82;  // forbici si fermano all'82% della larghezza
+  const RETURN_DUR    = 3000;  // ms ritorno dx→sx
+  const CUT_DUR       = 1800;  // ms taglio finale
+  const HIDE_DUR      = 500;   // ms fade forbici
+  const PAUSE_RESET   = 800;   // ms pausa prima del loop
+
+  function createSparks(div, x, y, count) {
+    for (let i = 0; i < count; i++) {
+      const spark = document.createElement('div');
+      spark.className = 'stitch-spark';
+      const angle = Math.random() * Math.PI * 2;
+      const dist  = 8 + Math.random() * 20;
+      spark.style.left = (x + Math.cos(angle) * dist) + 'px';
+      spark.style.top  = (y + Math.sin(angle) * dist) + 'px';
+      spark.style.animationDelay = (Math.random() * 0.15) + 's';
+      div.appendChild(spark);
+      requestAnimationFrame(() => spark.classList.add('burst'));
+      setTimeout(() => spark.remove(), 600);
+    }
+  }
 
   function runStitch(div) {
     const line     = div.querySelector('.stitch-line');
     const shine    = div.querySelector('.stitch-shine');
     const scissors = div.querySelector('.stitch-scissors');
     const svg      = div.querySelector('svg');
-    const VW       = svg.viewBox.baseVal.width;  // 1450 SVG user units
+    const VW       = svg.viewBox.baseVal.width;
 
     /* ── 1. RESET ── */
     scissors.style.transition = 'none';
@@ -1605,30 +1681,41 @@
     if (shine) { shine.style.opacity = '0'; shine.style.animation = 'none'; }
     scissors.style.opacity    = '0';
     scissors.style.transform  = 'translateX(0px)';
-    scissors.classList.remove('cutting');
+    scissors.classList.remove('cutting', 'snipping', 'travelling');
+    line.classList.remove('shaking');
     line.style.strokeDashoffset = String(VW);
 
     div.offsetHeight; /* reflow */
 
-    /* ── 2. FILO: si disegna da sx a dx ── */
-    line.style.transition = `stroke-dashoffset ${TRAVEL_DUR}ms linear`;
+    /* ── 2. FILO: si disegna da sx a dx con easing ── */
+    line.style.transition = `stroke-dashoffset ${TRAVEL_DUR}ms cubic-bezier(.25,.1,.25,1)`;
     line.style.strokeDashoffset = '0';
 
-    /* ── 2b. FORBICI: compaiono dopo SC_DELAY, viaggiano verso dx ── */
+    /* ── 2b. FORBICI: compaiono, viaggiano e tagliano strada facendo ── */
+    const stopPx = VW * SC_STOP;
     setTimeout(() => {
-      scissors.style.transition = `opacity 0.4s, transform ${SC_TRAVEL_DUR}ms linear`;
-      scissors.style.opacity    = '0.8';
-      scissors.style.transform  = `translateX(${VW}px)`;
+      scissors.classList.add('snipping', 'travelling');
+      scissors.style.transition = `opacity 0.5s ease-out, transform ${SC_TRAVEL_DUR}ms linear`;
+      scissors.style.opacity    = '0.9';
+      scissors.style.transform  = `translateX(${stopPx}px)`;
     }, SC_DELAY);
 
-    /* ── 3. FORBICI ARRIVANO → TAGLIANO ── */
+    /* ── 3. FORBICI ARRIVANO → TAGLIO FINALE ── */
     setTimeout(() => {
+      scissors.classList.remove('snipping');
       scissors.classList.add('cutting');
+
+      /* scintille al taglio finale */
+      const rect = div.getBoundingClientRect();
+      createSparks(div, rect.width * SC_STOP, rect.height / 2, 8);
+
+      /* filo vibra */
+      line.classList.add('shaking');
 
       /* ── 4. FORBICI SPARISCONO + SHIMMER ── */
       setTimeout(() => {
-        scissors.classList.remove('cutting');
-        scissors.style.transition = 'opacity 0.4s';
+        scissors.classList.remove('cutting', 'travelling');
+        scissors.style.transition = 'opacity 0.5s ease-in';
         scissors.style.opacity    = '0';
         if (shine) {
           shine.style.opacity   = '1';
@@ -1637,7 +1724,8 @@
 
         /* ── 5. FILO SI CANCELLA (ritorno) ── */
         setTimeout(() => {
-          line.style.transition = `stroke-dashoffset ${RETURN_DUR}ms linear`;
+          line.classList.remove('shaking');
+          line.style.transition = `stroke-dashoffset ${RETURN_DUR}ms cubic-bezier(.4,0,.6,1)`;
           line.style.strokeDashoffset = String(VW);
 
           /* ── 6. PAUSA → LOOP ── */
