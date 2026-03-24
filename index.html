@@ -547,13 +547,12 @@
       max-width: 580px; margin-bottom: 2rem; line-height: 1.7;
     }
     .prod-video-frame {
-      position: relative; width: 100%; padding-bottom: 56.25%;
+      width: 100%;
       background: #000; border-radius: 4px; overflow: hidden;
       border: 1px solid rgba(201,169,110,0.15);
     }
-    .prod-video-frame iframe {
-      position: absolute; inset: 0; width: 100%; height: 100%;
-      border: none;
+    .prod-video-frame video {
+      width: 100%; display: block; border-radius: 4px;
     }
     .prod-video-placeholder {
       display: flex; flex-direction: column; align-items: center; justify-content: center;
@@ -1277,10 +1276,10 @@
       <p class="prod-video-desc">
         Un viaggio esclusivo all'interno del nostro tomaificio: le mani, i macchinari e la dedizione quotidiana che trasformano la materia prima in alta artigianalità italiana.
       </p>
-      <!-- Inserisci qui l'ID del video YouTube quando disponibile -->
-      <div class="prod-video-placeholder">
-        <span>▶</span>
-        <p>Il video sarà disponibile non appena caricato su YouTube.</p>
+      <div class="prod-video-frame">
+        <video controls playsinline preload="metadata" poster="">
+          <source src="assets/videos/completo.mp4" type="video/mp4">
+        </video>
       </div>
     </div>
 
