@@ -1,6 +1,7 @@
 # LG-Shoes
 
 [![Apri il sito](https://img.shields.io/badge/Apri%20il%20sito-LG--Shoes-blue?style=for-the-badge&logo=github)](https://cammo22.github.io/LG-Shoes)
+[![Discord](https://img.shields.io/badge/Discord-DaProd-5865F2?logo=discord&logoColor=white)](https://discord.gg/Njs52aacwq)
 
 Descrizione
 ----------
